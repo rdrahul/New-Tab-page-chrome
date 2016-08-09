@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+
+  "name": "Getting started example",
+  "description": "This extension shows a Google Image search result for the current page",
+  "version": "1.0",
+
+  
+    "permissions":["identity","identity.email" ,"history" ],
+    
+    "chrome_url_overrides":
+    {
+        "newtab":"index.html" 
+    }
+    
+}

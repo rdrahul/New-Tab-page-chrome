@@ -1,0 +1,165 @@
+*
+{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+/*------------------------ Initial Setup -------------------*/
+body
+{
+    font-family: 'PT Sans', sans-serif;
+    color: #fff;
+    font-size:18px;
+    background: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,1)), url(../Images/everest.jpg);
+    background-size: cover;
+}
+
+.row
+{
+    margin: 0 auto;
+}
+
+
+/* --------------------Profile --------------------------*/
+.profile, .recent
+{
+    width: 80%;
+    padding: 20px;
+    margin:0 auto;
+    background: rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 5px #000;
+}
+.profile-pic
+{
+    position: relative;
+    margin: 0 auto;
+    width:30%;
+    padding-bottom: 30%;
+    border-radius: 50%;
+    margin-bottom: 30px;
+    background: #00B5B5;
+    box-shadow: 0px 1px 5px #000;
+    transition: all 0.3s ;
+}
+
+.profile h3,h4
+{
+    margin: 5px;
+    display: block;
+    padding: 5px;
+    text-align: center;
+    background: rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 2px #000;
+    
+}
+
+.profile h4
+{
+    
+    font-size: 90%;
+}
+.profile h3
+{
+    text-transform: uppercase;
+    font-size: 120%;
+}
+h3:after
+{
+    content:"";
+    width: 0;
+    opacity: 0;
+    border: 0.5px solid #00B5B5;
+    display: block;
+    margin: 0 auto;
+    margin-top: 5px;
+    transition: all 0.4s ease-in;
+}
+.profile:hover h3:after
+{
+    visibility:visible;
+    width: 70%;
+    opacity: 1;
+}
+.recent
+{
+    margin-top: 20px;
+    
+}
+.recent h2
+{
+    font-size:150%;
+    margin: 10px auto;
+    margin-top:-10px; 
+    text-align: center;
+}
+
+.recent:after
+{
+    display:block;
+    content:"";
+    margin:0 auto;
+    margin-top: 20px;
+    width: 0px;
+    height: 0px;
+    border-top: 15px solid rgba(255,255,255,0.1);
+    border-right: 15px solid transparent;
+    border-left: 15px solid transparent;
+    margin-bottom: -35px;
+}
+
+.recent-list
+{
+    margin-top: 20px;
+}
+
+
+/*------------Right side bar ---------------*/
+.search
+{
+    width: 90%;
+}
+input[type="text"]
+{
+    font-size:150%;   
+}
+input
+{
+    border:0;
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+    color: white;
+    padding: 10px;
+    font-size: 100%;
+    background: inherit;
+    width: 95%;
+    height: 50px;
+    float: right;
+    transition: all 0.3s ease-out;
+}
+
+input:focus 
+{
+    outline: none;
+    border-bottom: 2px solid #00B5B5;
+}
+
+.search-button
+{
+    border-radius: 50%;
+    width: 50px;
+    height:50px;
+    background: #00B5B5;
+    text-align: center;
+    padding: 10px;
+}
+
+.icon
+{
+    font-size: 160%;
+}
+
+.icon-big
+{
+    font-size: 650%;
+    position: absolute;
+    top:-10px; 
+}

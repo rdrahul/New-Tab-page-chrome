@@ -15,23 +15,25 @@ $(document).ready(function()
                         {
                             myfunc();
                         }
-                     //console.log(searchBox.val());
+                     
                      });
     
     
-   CalcHistory(); 
+    CalcHistory();   //calculates the most visited sites -beware if you watch porn without incognito
     
-    function myfunc()
+    /* for searchinfg google -- required  add feature to search from other search engines  */
+    function myfunc()   
     {
-        console.log(searchBox.val());
+        //console.log(searchBox.val());
         var query=Host+searchBox.val().split(" ").join('+');
         console.log(query);
         document.location=query;
+        /*
         chrome.identity.getProfileUserInfo(function(user_info)
                                           {
            console.log(user_info); 
         });
-        
+        */
     }
     
     
@@ -45,23 +47,20 @@ var CalcTime=function(n){
     return date.getTime();
 };
 
-
+/*  
+    CalcHistory -- Function to get history from chrome for a certain amount of time
+*/
 function CalcHistory()
 {
+    // get lsat 2 months history and limit the result to 5000 entries
     var ChromeHistory={text:'',startTime:CalcTime(2),maxResults:5000};
     chrome.history.search(ChromeHistory,HistoryCallback);
-    
-        
-    //getting all the history items
-    /*for( i=0;i<6; i++ )
-    {
-        chrome.history.search(ChromeHistory,HistoryCallback);
-        ChromeHistory.startTime=HistoryItems[HistoryItems.length-1];
-       
-    }
-    */
 }
 
+/*
+    Function Callback for chrome history search - 
+     action to be taken after chrome returns the result
+*/
 var HistoryCallback=function(historyItems)
 {
     HistoryItems=(historyItems);
@@ -69,6 +68,7 @@ var HistoryCallback=function(historyItems)
     completed();
     
 }
+
 //for sorting 
 function compare(value1 ,value2)
 {
@@ -113,7 +113,8 @@ function completed()
                 }
                 catch(error)
                     {
-                        
+                        //do something if required
+                        console.log(error); //never let the errors pass silently
                     }
             });
             for(var key in visitedDict)
@@ -121,17 +122,25 @@ function completed()
                     MostVisited.push(visitedDict[key]);
                 }
             MostVisited.sort(compare);
-            console.log(MostVisited.slice(0,10));
+            //console.log(MostVisited.slice(0,10));
         }
-    Done();
+    Done();     // hurray!! -- got my top 10 result DONE!!!
 }
 
+
+/* 
+    Fuction to add the results to the DOM
+*/
 function Done()
 {
     var ul=$('#MostVisited');
     for (i=0;i<10;i++)
-    { var s='<li>'+ MostVisited[i].url+' </li>';
-            ul.append(s);
+    { 
+        url='https://'+ MostVisited[i].url;
+        var title=MostVisited[i].url.replace('www.','').split('.')[0];
+        //console.log(title);
+        var s='<li class="links" ><a href=" ' + url +'" > <span>    ' + title+ '</span> - ' +MostVisited[i].url +'</a> </li>';
+        ul.append(s);
     }
  }
 

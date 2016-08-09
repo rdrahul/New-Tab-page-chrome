@@ -163,3 +163,29 @@ input:focus
     position: absolute;
     top:-10px; 
 }
+
+/*-----------MOST VISITED -----------*/
+
+#MostVisited
+{
+    list-style: none;
+    color:white;
+}
+#MostVisited  a
+{
+    text-decoration: none;
+    color:darkcyan;
+    padding:5px;
+}
+.links
+{
+    margin: 5px;
+    font-size:90%;
+    word-wrap: none;
+   
+}
+.links span
+{
+    color:white;
+    text-transform:capitalize;
+}

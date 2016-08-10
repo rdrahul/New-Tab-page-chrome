@@ -10,7 +10,7 @@ body
     font-family: 'PT Sans', sans-serif;
     color: #fff;
     font-size:18px;
-    background: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,1)), url(../Images/everest.jpg);
+    background: linear-gradient(rgba(0,0,0,0.0),rgba(0,0,0,0.4)), url(../Images/shell.jpeg);
     background-size: cover;
 }
 
@@ -140,6 +140,7 @@ input
     height: 50px;
     float: right;
     transition: all 0.3s ease-out;
+    font-family: 'PT Sans', sans-serif;
 }
 
 input:focus 
@@ -217,4 +218,35 @@ input:-ms-input-placeholder {
 {
     color:white;
     text-transform:capitalize;
+}
+
+/*--------Weather ----------------*/
+.weather
+{
+    margin-top:10px;
+}
+.weather-card
+{
+    position: relative;
+    text-align: center;
+    transition: all 0.4s ease-out;
+}
+.weather-card:hover
+{
+    transform: scale(1.1);
+}
+.w-icon
+{
+    font-size: 700%;
+    color: #00B5B5;
+    
+}
+#quote
+{
+    text-align: justify;
+}
+
+#author
+{
+    text-align: right;
 }

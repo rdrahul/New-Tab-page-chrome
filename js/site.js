@@ -5,7 +5,7 @@ var MostVisited=[]
 var IsVisited=false; 
 $(document).ready(function()
 {
-    
+
     var searchBox=$('#search-box');
     $('#search').click(myfunc);
     
@@ -23,7 +23,19 @@ $(document).ready(function()
     var message=setMessage();
     messageField.html(message);
     
-    CalcHistory();   //calculates the most visited sites -beware if you watch porn without incognito
+    MostVisited=JSON.parse(localStorage.getItem('MostVisited'));
+    if (MostVisited==null)
+    {
+        console.log("CALCULATING");
+        CalcHistory();   //calculates the most visited sites -beware if you watch porn without incognito
+    }
+    else{
+        Done(); 
+    }
+    
+    
+    WeatherDetails();
+    Quote();
     
     /* for searching google -- required  add feature to search from other search engines  */
     function myfunc()   
@@ -126,6 +138,7 @@ function completed()
             MostVisited.sort(compare);
             //console.log(MostVisited.slice(0,10));
         }
+    localStorage.setItem('MostVisited',JSON.stringify(MostVisited));
     Done();     // hurray!! -- got my top 10 result DONE!!!
 }
 
@@ -213,4 +226,36 @@ function setMessage()
         }
     return message;
     
+}
+
+function WeatherDetails()
+{
+    Api='http://api.openweathermap.org/data/2.5/weather';
+    data={ 'q':'Delhi' ,'appid':'f94b0a0a11e6cfdf9dee972e620fc46e'};
+    $.getJSON(Api,data,PopulateUI);
+}
+
+function PopulateUI(data)
+{
+    console.log(data);
+    weatherField=$('#temp');
+    var temp=data["main"]["temp"] -273.15;
+    temp=parseFloat(temp).toFixed(1) ;
+    console.log(temp,weatherField);
+    weatherField.html(temp+ '&degC');
+}
+
+function Quote()
+{
+    Api='http://quotes.rest/qod.json';
+    data={'category':'inspire'};
+    $.getJSON(Api,data,function(data)
+    {
+        console.log(data);
+        quote=data["contents"]["quotes"][0]["quote"];
+        author='by - ' + data["contents"]["quotes"][0]["author"];
+        $('#quote').html(quote)
+        $("#author").html(author);
+    }              
+    );
 }

@@ -3,6 +3,9 @@ var Host="https://www.google.com/#q=";
 var visitedDict=[];
 var MostVisited=[]
 var IsVisited=false; 
+var weatherDetails=null;
+var quoteDetails=null;
+
 $(document).ready(function()
 {
 
@@ -23,6 +26,7 @@ $(document).ready(function()
     var message=setMessage();
     messageField.html(message);
     
+    //retrieve previously visited 
     MostVisited=JSON.parse(localStorage.getItem('MostVisited'));
     if (MostVisited==null)
     {
@@ -33,9 +37,23 @@ $(document).ready(function()
         Done(); 
     }
     
+    //retrieve previously saved weather details
+    weatherDetails=JSON.parse(localStorage.getItem('WeatherDetails'));
+    if (weatherDetails==null)
+        WeatherDetails();
+    else
+        PopulateWeatherUI(weatherDetails);
     
-    WeatherDetails();
-    Quote();
+    
+    //retrieve previously saved quote details
+    quoteDetails=JSON.parse(localStorage.getItem('Quote'));
+    if (quoteDetails == null)
+    {
+        Quote();
+    }
+    else{
+        PopulateQuoteUI(quoteDetails);
+    }
     
     /* for searching google -- required  add feature to search from other search engines  */
     function myfunc()   
@@ -232,17 +250,22 @@ function WeatherDetails()
 {
     Api='http://api.openweathermap.org/data/2.5/weather';
     data={ 'q':'Delhi' ,'appid':'f94b0a0a11e6cfdf9dee972e620fc46e'};
-    $.getJSON(Api,data,PopulateUI);
+    $.getJSON(Api,data,function(data)
+             {
+        localStorage.setItem('Weather',JSON.stringify(data));
+        PopulateWeatherUI(data);
+    });
 }
 
-function PopulateUI(data)
+function PopulateWeatherUI(data)
 {
-    console.log(data);
+    //console.log(data);
     weatherField=$('#temp');
     var temp=data["main"]["temp"] -273.15;
     temp=parseFloat(temp).toFixed(1) ;
     console.log(temp,weatherField);
     weatherField.html(temp+ '&degC');
+    
 }
 
 function Quote()
@@ -250,12 +273,17 @@ function Quote()
     Api='http://quotes.rest/qod.json';
     data={'category':'inspire'};
     $.getJSON(Api,data,function(data)
-    {
-        console.log(data);
+             {
+        localStorage.setItem('Quote',JSON.stringify(data));
+        PopulateQuoteUI(data);
+    });
+}
+function PopulateQuoteUI(data)
+{
+        //console.log(data);
         quote=data["contents"]["quotes"][0]["quote"];
         author='by - ' + data["contents"]["quotes"][0]["author"];
         $('#quote').html(quote)
         $("#author").html(author);
-    }              
-    );
+        //
 }
